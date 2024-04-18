@@ -15,6 +15,11 @@ namespace ToDoList.Controllers
             _repositorioUsuario = repositorioUsuario;
         }
 
-
+        [HttpGet("obter-usuarios")]
+        public OkObjectResult ObterTodos([FromQuery] string? nome)
+        {
+            var usuarios = _repositorioUsuario.ObterTodos(nome);
+            return Ok(usuarios);
+        }
     }
 }

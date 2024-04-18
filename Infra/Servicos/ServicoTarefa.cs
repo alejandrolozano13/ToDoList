@@ -28,6 +28,11 @@ namespace Infra.Servicos
             throw new NotImplementedException();
         }
 
+        public List<Tarefas> ObterTodos(string? nome)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Remover(Tarefas id)
         {
             throw new NotImplementedException();

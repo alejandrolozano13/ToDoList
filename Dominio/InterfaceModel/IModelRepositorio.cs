@@ -6,5 +6,6 @@
         void Editar(T objeto);
         void Remover(T id);
         T ObterPorId(T id);
+        List<T> ObterTodos(string? nome);
     }
 }

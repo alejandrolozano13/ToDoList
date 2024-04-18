@@ -1,6 +1,7 @@
 ﻿using Dominio.InterfaceModel;
 using Dominio.Modelos;
 using Infra.Dados;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Servicos
 {
@@ -10,7 +11,7 @@ namespace Infra.Servicos
 
         public ServicoUsuario(AppDbContext conexao)
         {
-
+            _conexao = conexao;
         }
 
         public void Criar(Usuario objeto)
@@ -26,6 +27,11 @@ namespace Infra.Servicos
         public Usuario ObterPorId(Usuario id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Usuario> ObterTodos(string? nome)
+        {
+            return _conexao.Usuarios.ToList();
         }
 
         public void Remover(Usuario id)
