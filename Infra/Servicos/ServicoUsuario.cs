@@ -10,25 +10,25 @@ namespace Infra.Servicos
 
         public ServicoUsuario(AppDbContext conexao)
         {
-            _conexao = conexao;
+
         }
 
-        public T Criar<T>(object objeto)
+        public void Criar(Usuario objeto)
         {
             throw new NotImplementedException();
         }
 
-        public T Editar<T>(object objeto)
+        public void Editar(Usuario objeto)
         {
             throw new NotImplementedException();
         }
 
-        public Usuario ObterPorId(object objeto)
+        public Usuario ObterPorId(Usuario id)
         {
             throw new NotImplementedException();
         }
 
-        public T Remover<T>(object objeto)
+        public void Remover(Usuario id)
         {
             throw new NotImplementedException();
         }

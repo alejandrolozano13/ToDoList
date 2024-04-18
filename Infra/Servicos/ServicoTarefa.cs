@@ -13,22 +13,22 @@ namespace Infra.Servicos
             _conexao = conexao;
         }
 
-        public T Criar<T>(object objeto)
+        public void Criar(Tarefas objeto)
         {
             throw new NotImplementedException();
         }
 
-        public T Editar<T>(object objeto)
+        public void Editar(Tarefas objeto)
         {
             throw new NotImplementedException();
         }
 
-        public Tarefas ObterPorId(object objeto)
+        public Tarefas ObterPorId(Tarefas id)
         {
             throw new NotImplementedException();
         }
 
-        public T Remover<T>(object objeto)
+        public void Remover(Tarefas id)
         {
             throw new NotImplementedException();
         }

@@ -1,10 +1,10 @@
 ﻿namespace Dominio.InterfaceModel
 {
-    public interface IModelRepositorio <T>
+    public interface IModelRepositorio <T> where T : class
     {
-        T Criar<T>(object objeto);
-        T Editar<T>(object objeto);
-        T Remover<T>(object objeto);
-        T ObterPorId(object objeto);
+        void Criar(T objeto);
+        void Editar(T objeto);
+        void Remover(T id);
+        T ObterPorId(T id);
     }
 }
