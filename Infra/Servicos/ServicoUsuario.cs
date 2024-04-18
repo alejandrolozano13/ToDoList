@@ -1,7 +1,6 @@
 ﻿using Dominio.InterfaceModel;
 using Dominio.Modelos;
 using Infra.Dados;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Servicos
 {
@@ -16,17 +15,26 @@ namespace Infra.Servicos
 
         public void Criar(Usuario objeto)
         {
-            throw new NotImplementedException();
+            _conexao.Add(objeto);
+            _conexao.SaveChanges();
         }
 
-        public void Editar(Usuario objeto)
+        public void Editar(Usuario objeto, int id)
         {
-            throw new NotImplementedException();
+            var usuario = ObterPorId(id);
+            
+            usuario.Nome = objeto.Nome;
+            usuario.Email = objeto.Email;
+            usuario.Senha = objeto.Senha;
+            usuario.Tarefas = objeto.Tarefas;
+
+            _conexao.SaveChanges();
         }
 
-        public Usuario ObterPorId(Usuario id)
+        public Usuario ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _conexao.Usuarios.FirstOrDefault(x => x.Id == id)
+                ?? throw new Exception("Não foi possivel encontrar o usuario");
         }
 
         public List<Usuario> ObterTodos(string? nome)
@@ -34,9 +42,11 @@ namespace Infra.Servicos
             return _conexao.Usuarios.ToList();
         }
 
-        public void Remover(Usuario id)
+        public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var usuario = ObterPorId(id);
+            _conexao.Remove(usuario);
+            _conexao.SaveChanges();
         }
     }
 }

@@ -18,12 +18,12 @@ namespace Infra.Servicos
             throw new NotImplementedException();
         }
 
-        public void Editar(Tarefas objeto)
+        public void Editar(Tarefas objeto, int id)
         {
             throw new NotImplementedException();
         }
 
-        public Tarefas ObterPorId(Tarefas id)
+        public Tarefas ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace Infra.Servicos
             throw new NotImplementedException();
         }
 
-        public void Remover(Tarefas id)
+        public void Remover(int id)
         {
             throw new NotImplementedException();
         }
