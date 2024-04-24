@@ -1,4 +1,5 @@
 using Dominio.InterfaceModel;
+using Dominio.Interfaces;
 using Dominio.Modelos;
 using Infra.Dados;
 using Infra.Servicos;
@@ -14,7 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IModelRepositorio<Usuario>, ServicoUsuario>();
-builder.Services.AddScoped<IModelRepositorio<Tarefas>, ServicoTarefa>();
+//builder.Services.AddScoped<IModelRepositorio<Tarefas>, ServicoTarefa>();
+builder.Services.AddScoped<ITarefa, ServicoTarefa>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

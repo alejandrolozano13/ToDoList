@@ -1,4 +1,5 @@
 ﻿using Dominio.InterfaceModel;
+using Dominio.Interfaces;
 using Dominio.Modelos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,9 @@ namespace ToDoList.Controllers
     [ApiController]
     public class TarefasController : ControllerBase
     {
-        private readonly IModelRepositorio<Tarefas> _repositorioTarefa;
+        private readonly ITarefa _repositorioTarefa;
 
-        public TarefasController(IModelRepositorio<Tarefas> repositorioTarefa)
+        public TarefasController(ITarefa repositorioTarefa)
         {
             _repositorioTarefa = repositorioTarefa;
         }
@@ -29,11 +30,18 @@ namespace ToDoList.Controllers
             return Ok(tarefa);
         }
 
+        [HttpGet("obter-por-usuarioId/{id}")]
+        public OkObjectResult ObterPorUsuarioId(int id)
+        {
+            var tarefa = _repositorioTarefa.ObterPorUsuarioId(id);
+            return Ok(tarefa);
+        }
+
         [HttpPost("adicionar-tarefa")]
         public CreatedResult Criar([FromBody] Tarefas tarefas)
         {
             _repositorioTarefa.Criar(tarefas);
-            return Created();
+            return Created("adicionar-tarefa", tarefas);
         }
 
         [HttpPut("editar-tarefa/{id}")]
@@ -43,7 +51,7 @@ namespace ToDoList.Controllers
             return NoContent();
         }
 
-        [HttpDelete("Remover-tarefa/{id}")]
+        [HttpDelete("remover-tarefa/{id}")]
         public NoContentResult Remover(int id)
         {
             _repositorioTarefa.Remover(id);

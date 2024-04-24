@@ -1,12 +1,14 @@
 ﻿using Dominio.InterfaceModel;
+using Dominio.Interfaces;
 using Dominio.Modelos;
 using Infra.Dados;
 
 namespace Infra.Servicos
 {
-    public class ServicoTarefa : IModelRepositorio<Tarefas>
+    public class ServicoTarefa : ITarefa
     {
         private readonly AppDbContext _conexao;
+
 
         public ServicoTarefa(AppDbContext conexao)
         {
@@ -37,6 +39,12 @@ namespace Infra.Servicos
         {
             return _conexao.Tarefas.FirstOrDefault(x => x.Id == id)
                 ?? throw new Exception("Tarefa não encontrada.");
+        }
+
+        public List<Tarefas> ObterPorUsuarioId(int id)
+        {
+            return _conexao.Tarefas.Where(x => x.UsuarioId == id).ToList()
+                ?? throw new Exception("Tarefa não encontrada no usuario informado");
         }
 
         public List<Tarefas> ObterTodos(string? nome)
