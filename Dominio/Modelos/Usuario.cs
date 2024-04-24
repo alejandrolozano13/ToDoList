@@ -4,7 +4,7 @@ namespace Dominio.Modelos
 {
     public class Usuario
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         
         public string Nome { get; set; }
         
@@ -13,6 +13,6 @@ namespace Dominio.Modelos
         public string Senha { get; set; }
 
         [JsonIgnore]
-        public List<Tarefas> Tarefas { get; set; } = new();
+        public List<Tarefas>? Tarefas { get; set; }
     }
 }

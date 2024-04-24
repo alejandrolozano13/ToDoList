@@ -13,20 +13,20 @@ namespace Infra.Servicos
             _conexao = conexao;
         }
 
-        public void Criar(Usuario objeto)
+        public void Criar(Usuario usuario)
         {
-            _conexao.Add(objeto);
+            _conexao.Add(usuario);
             _conexao.SaveChanges();
         }
 
-        public void Editar(Usuario objeto, int id)
+        public void Editar(Usuario usuario, int id)
         {
-            var usuario = ObterPorId(id);
-            
-            usuario.Nome = objeto.Nome;
-            usuario.Email = objeto.Email;
-            usuario.Senha = objeto.Senha;
-            usuario.Tarefas = objeto.Tarefas;
+            var usuarioDoBanco = ObterPorId(id);
+
+            usuarioDoBanco.Nome = usuario.Nome;
+            usuarioDoBanco.Email = usuario.Email;
+            usuarioDoBanco.Senha = usuario.Senha;
+            usuarioDoBanco.Tarefas = usuario.Tarefas;
 
             _conexao.SaveChanges();
         }

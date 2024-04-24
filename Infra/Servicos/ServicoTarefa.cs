@@ -13,29 +13,42 @@ namespace Infra.Servicos
             _conexao = conexao;
         }
 
-        public void Criar(Tarefas objeto)
+        public void Criar(Tarefas tarefa)
         {
-            throw new NotImplementedException();
+            _conexao.Add(tarefa);
+            _conexao.SaveChanges();
         }
 
-        public void Editar(Tarefas objeto, int id)
+        public void Editar(Tarefas tarefa, int id)
         {
-            throw new NotImplementedException();
+            var tarefaDoBanco = ObterPorId(id);
+
+            tarefaDoBanco.UsuarioId = tarefa.UsuarioId;
+            tarefaDoBanco.Descricao = tarefa.Descricao;
+            tarefaDoBanco.Status = tarefa.Status;
+            tarefaDoBanco.Nome = tarefa.Nome;
+            tarefaDoBanco.DataInicial = tarefa.DataInicial;
+            tarefaDoBanco.DataFinal = tarefa.DataFinal;
+
+            _conexao.SaveChanges();
         }
 
         public Tarefas ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _conexao.Tarefas.FirstOrDefault(x => x.Id == id)
+                ?? throw new Exception("Tarefa não encontrada.");
         }
 
         public List<Tarefas> ObterTodos(string? nome)
         {
-            throw new NotImplementedException();
+            return _conexao.Tarefas.ToList();
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            var tarefa = ObterPorId(id);
+            _conexao.Remove(tarefa);
+            _conexao.SaveChanges();
         }
     }
 }

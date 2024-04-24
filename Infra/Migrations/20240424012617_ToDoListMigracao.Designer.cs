@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240417010502_CriandoBancoDeDados")]
-    partial class CriandoBancoDeDados
+    [Migration("20240424012617_ToDoListMigracao")]
+    partial class ToDoListMigracao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
