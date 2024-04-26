@@ -1,5 +1,4 @@
-﻿using Dominio.InterfaceModel;
-using Dominio.Interfaces;
+﻿using Dominio.Interfaces;
 using Dominio.Modelos;
 using Microsoft.AspNetCore.Mvc;
 

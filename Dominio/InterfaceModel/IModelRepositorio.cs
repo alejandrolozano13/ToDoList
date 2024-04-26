@@ -1,6 +1,4 @@
-﻿using Dominio.Modelos;
-
-namespace Dominio.InterfaceModel
+﻿namespace Dominio.InterfaceModel
 {
     public interface IModelRepositorio <T> where T : class
     {

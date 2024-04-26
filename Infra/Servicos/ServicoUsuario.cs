@@ -1,20 +1,30 @@
-﻿using Dominio.InterfaceModel;
+﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using FluentValidation;
 using Infra.Dados;
 
 namespace Infra.Servicos
 {
-    public class ServicoUsuario : IModelRepositorio<Usuario>
+    public class ServicoUsuario : IUsuario
     {
         private readonly AppDbContext _conexao;
+        private readonly IValidator<Usuario> _validador;
 
-        public ServicoUsuario(AppDbContext conexao)
+        public ServicoUsuario(AppDbContext conexao, IValidator<Usuario> validador)
         {
             _conexao = conexao;
+            _validador = validador;
         }
 
         public void Criar(Usuario usuario)
         {
+            var resultado = _validador.Validate(usuario);
+            
+            if (!resultado.IsValid)
+            {
+                throw new Exception(resultado.ToString());
+            }
+
             _conexao.Add(usuario);
             _conexao.SaveChanges();
         }
@@ -23,10 +33,15 @@ namespace Infra.Servicos
         {
             var usuarioDoBanco = ObterPorId(id);
 
-            usuarioDoBanco.Nome = usuario.Nome;
-            usuarioDoBanco.Email = usuario.Email;
-            usuarioDoBanco.Senha = usuario.Senha;
-            usuarioDoBanco.Tarefas = usuario.Tarefas;
+            var resultado = _validador.Validate(usuario);
+
+            if (!resultado.IsValid)
+            {
+                usuarioDoBanco.Nome = usuario.Nome;
+                usuarioDoBanco.Email = usuario.Email;
+                usuarioDoBanco.Senha = usuario.Senha;
+                usuarioDoBanco.Tarefas = usuario.Tarefas;
+            }
 
             _conexao.SaveChanges();
         }

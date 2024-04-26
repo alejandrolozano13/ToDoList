@@ -1,4 +1,4 @@
-﻿using Dominio.InterfaceModel;
+﻿using Dominio.Interfaces;
 using Dominio.Modelos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace ToDoList.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IModelRepositorio<Usuario> _repositorioUsuario;
+        private readonly IUsuario _repositorioUsuario;
 
-        public UsuarioController(IModelRepositorio<Usuario> repositorioUsuario)
+        public UsuarioController(IUsuario repositorioUsuario)
         {
             _repositorioUsuario = repositorioUsuario;
         }

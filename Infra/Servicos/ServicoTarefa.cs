@@ -1,6 +1,6 @@
-﻿using Dominio.InterfaceModel;
-using Dominio.Interfaces;
+﻿using Dominio.Interfaces;
 using Dominio.Modelos;
+using FluentValidation;
 using Infra.Dados;
 
 namespace Infra.Servicos
@@ -8,15 +8,23 @@ namespace Infra.Servicos
     public class ServicoTarefa : ITarefa
     {
         private readonly AppDbContext _conexao;
+        private readonly IValidator<Tarefas> _validador;
 
-
-        public ServicoTarefa(AppDbContext conexao)
+        public ServicoTarefa(AppDbContext conexao, IValidator<Tarefas> validador)
         {
             _conexao = conexao;
+            _validador = validador;
         }
 
         public void Criar(Tarefas tarefa)
         {
+            var resultado = _validador.Validate(tarefa);
+
+            if(!resultado.IsValid)
+            {
+                throw new Exception(resultado.ToString());
+            }
+
             _conexao.Add(tarefa);
             _conexao.SaveChanges();
         }
@@ -25,12 +33,17 @@ namespace Infra.Servicos
         {
             var tarefaDoBanco = ObterPorId(id);
 
-            tarefaDoBanco.UsuarioId = tarefa.UsuarioId;
-            tarefaDoBanco.Descricao = tarefa.Descricao;
-            tarefaDoBanco.Status = tarefa.Status;
-            tarefaDoBanco.Nome = tarefa.Nome;
-            tarefaDoBanco.DataInicial = tarefa.DataInicial;
-            tarefaDoBanco.DataFinal = tarefa.DataFinal;
+            var resultado = _validador.Validate(tarefa);
+
+            if(!resultado.IsValid)
+            {
+                tarefaDoBanco.UsuarioId = tarefa.UsuarioId;
+                tarefaDoBanco.Descricao = tarefa.Descricao;
+                tarefaDoBanco.Status = tarefa.Status;
+                tarefaDoBanco.Nome = tarefa.Nome;
+                tarefaDoBanco.DataInicial = tarefa.DataInicial;
+                tarefaDoBanco.DataFinal = tarefa.DataFinal;
+            }
 
             _conexao.SaveChanges();
         }

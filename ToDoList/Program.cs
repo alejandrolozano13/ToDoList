@@ -1,6 +1,7 @@
-using Dominio.InterfaceModel;
 using Dominio.Interfaces;
 using Dominio.Modelos;
+using Dominio.Validacoes;
+using FluentValidation;
 using Infra.Dados;
 using Infra.Servicos;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IModelRepositorio<Usuario>, ServicoUsuario>();
-//builder.Services.AddScoped<IModelRepositorio<Tarefas>, ServicoTarefa>();
+builder.Services.AddScoped<IUsuario, ServicoUsuario>();
 builder.Services.AddScoped<ITarefa, ServicoTarefa>();
+builder.Services.AddScoped<IValidator<Usuario>, ValidacaoUsuario>();
+builder.Services.AddScoped<IValidator<Tarefas>, ValidacaoTarefa>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
