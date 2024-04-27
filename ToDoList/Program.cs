@@ -3,6 +3,7 @@ using Dominio.Modelos;
 using Dominio.Validacoes;
 using FluentValidation;
 using Infra.Dados;
+using Infra.MongoDbRepository.Configuracoes;
 using Infra.Servicos;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,10 +16,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddSingleton<Usuario>();
+
 builder.Services.AddScoped<IUsuario, ServicoUsuario>();
 builder.Services.AddScoped<ITarefa, ServicoTarefa>();
 builder.Services.AddScoped<IValidator<Usuario>, ValidacaoUsuario>();
 builder.Services.AddScoped<IValidator<Tarefas>, ValidacaoTarefa>();
+
+builder.Services.Configure<DatabaseSettings>(options =>
+{
+    options.ConnectionString = builder.Configuration.GetSection("MongoDatabase:ConnectionString").Value;
+    options.DatabaseName = builder.Configuration.GetSection("MongoDatabase:DatabaseName").Value;
+    options.CollectionName = builder.Configuration.GetSection("MongoDatabase:CollectionName").Value;
+});
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

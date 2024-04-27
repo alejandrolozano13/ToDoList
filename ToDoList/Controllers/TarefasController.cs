@@ -23,14 +23,14 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet("obter-por-id/{id}")]
-        public OkObjectResult ObterPorId(int id)
+        public OkObjectResult ObterPorId(string id)
         {
             var tarefa = _repositorioTarefa.ObterPorId(id);
             return Ok(tarefa);
         }
 
         [HttpGet("obter-por-usuarioId/{id}")]
-        public OkObjectResult ObterPorUsuarioId(int id)
+        public OkObjectResult ObterPorUsuarioId(string id)
         {
             var tarefa = _repositorioTarefa.ObterPorUsuarioId(id);
             return Ok(tarefa);
@@ -44,14 +44,14 @@ namespace ToDoList.Controllers
         }
 
         [HttpPut("editar-tarefa/{id}")]
-        public NoContentResult Editar([FromBody] Tarefas tarefas, int id)
+        public NoContentResult Editar([FromBody] Tarefas tarefas, string id)
         {
             _repositorioTarefa.Editar(tarefas, id);
             return NoContent();
         }
 
         [HttpDelete("remover-tarefa/{id}")]
-        public NoContentResult Remover(int id)
+        public NoContentResult Remover(string id)
         {
             _repositorioTarefa.Remover(id);
             return NoContent();

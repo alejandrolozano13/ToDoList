@@ -5,6 +5,6 @@ namespace Dominio.Interfaces
 {
     public interface ITarefa : IModelRepositorio<Tarefas>
     {
-        List<Tarefas> ObterPorUsuarioId(int id);
+        List<Tarefas> ObterPorUsuarioId(string id);
     }
 }

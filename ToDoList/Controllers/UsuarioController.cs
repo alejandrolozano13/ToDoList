@@ -23,7 +23,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet("obter-usuario-por-id/{id}")]
-        public OkObjectResult ObterPorId (int id)
+        public OkObjectResult ObterPorId (string id)
         {
             var usuario = _repositorioUsuario.ObterPorId(id);
             return Ok(usuario);
@@ -37,14 +37,14 @@ namespace ToDoList.Controllers
         }
 
         [HttpDelete("remover-usuario/{id}")]
-        public NoContentResult Remover (int id)
+        public NoContentResult Remover (string id)
         {
             _repositorioUsuario.Remover(id);
             return NoContent();
         }
 
         [HttpPut("editar-usuario/{id}")]
-        public NoContentResult Editar ([FromBody] Usuario usuario, int id)
+        public NoContentResult Editar ([FromBody] Usuario usuario, string id)
         {
             _repositorioUsuario.Editar(usuario, id);
             return NoContent();

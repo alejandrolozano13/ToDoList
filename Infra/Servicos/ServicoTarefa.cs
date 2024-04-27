@@ -29,7 +29,7 @@ namespace Infra.Servicos
             _conexao.SaveChanges();
         }
 
-        public void Editar(Tarefas tarefa, int id)
+        public void Editar(Tarefas tarefa, string id)
         {
             var tarefaDoBanco = ObterPorId(id);
 
@@ -48,13 +48,13 @@ namespace Infra.Servicos
             _conexao.SaveChanges();
         }
 
-        public Tarefas ObterPorId(int id)
+        public Tarefas ObterPorId(string id)
         {
             return _conexao.Tarefas.FirstOrDefault(x => x.Id == id)
                 ?? throw new Exception("Tarefa não encontrada.");
         }
 
-        public List<Tarefas> ObterPorUsuarioId(int id)
+        public List<Tarefas> ObterPorUsuarioId(string id)
         {
             return _conexao.Tarefas.Where(x => x.UsuarioId == id).ToList()
                 ?? throw new Exception("Tarefa não encontrada no usuario informado");
@@ -65,7 +65,7 @@ namespace Infra.Servicos
             return _conexao.Tarefas.ToList();
         }
 
-        public void Remover(int id)
+        public void Remover(string id)
         {
             var tarefa = ObterPorId(id);
             _conexao.Remove(tarefa);
