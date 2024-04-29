@@ -27,7 +27,7 @@ namespace Infra.Servicos
             _conexaoMongoDb = mongoDb.GetCollection<Usuario>(databaseSettings.Value.CollectionName);
         }
 
-        public void Criar(Usuario usuario)
+        public async void Criar(Usuario usuario)
         {
             var resultado = _validador.Validate(usuario);
             
@@ -35,6 +35,8 @@ namespace Infra.Servicos
             {
                 throw new Exception(resultado.ToString());
             }
+
+            _conexaoMongoDb.InsertOneAsync(usuario);
 
             //_conexao.Add(usuario);
             //_conexao.SaveChanges();

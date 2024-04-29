@@ -24,8 +24,8 @@ namespace Dominio.Modelos
 
     public class Usuario()
     {
-        [BsonId] // Identifica que o elemento referenciado será um id
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)] // atribui que o id do objeto será o id
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string? Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
